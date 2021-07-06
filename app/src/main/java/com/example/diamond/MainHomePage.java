@@ -1,5 +1,6 @@
 package com.example.diamond;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,9 +9,17 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+
 public class MainHomePage extends AppCompatActivity {
 
     ImageView arraw_main_home_page,btn_1,btn_2,btn_3,btn_4,btn_5;
+    AdRequest adRequest;
+    InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +28,8 @@ public class MainHomePage extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        adRequest = new AdRequest.Builder().build();
 
         arraw_main_home_page = findViewById(R.id.arraw_main_home_page);
 
@@ -77,4 +88,32 @@ public class MainHomePage extends AppCompatActivity {
         });
 
     }
+
+//    public void showAd(){
+//        InterstitialAd.load(MainHomePage.this, "ca-app-pub-7287613388864066/8167764203", adRequest, new InterstitialAdLoadCallback() {
+//            @Override
+//            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+//                mInterstitialAd = interstitialAd;
+//                mInterstitialAd.show(MainHomePage.this);
+//
+//                mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+//                    @Override
+//                    public void onAdDismissedFullScreenContent() {
+//
+//                        Intent intent = new Intent(Options.this,HomePage.class);
+//                        startActivity(intent);
+//
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+//                super.onAdFailedToLoad(loadAdError);
+//                Intent intent = new Intent(Options.this,HomePage.class);
+//                startActivity(intent);
+//            }
+//        });
+//    }
+
 }

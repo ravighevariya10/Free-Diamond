@@ -1,5 +1,6 @@
 package com.example.diamond;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,10 +9,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
 public class Options extends AppCompatActivity {
 
     ImageView sharebtn,startbtn,ratebtn;
+    AdRequest adRequest;
+    InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +30,8 @@ public class Options extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        adRequest = new AdRequest.Builder().build();
 
         sharebtn = findViewById(R.id.sharebtn);
         startbtn = findViewById(R.id.startbtn);
@@ -41,8 +53,7 @@ public class Options extends AppCompatActivity {
         startbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Options.this,HomePage.class);
-                startActivity(intent);
+                showAd();
             }
         });
 
@@ -56,4 +67,32 @@ public class Options extends AppCompatActivity {
         });
 
     }
+
+    public void showAd(){
+        InterstitialAd.load(Options.this, "ca-app-pub-7287613388864066/8167764203", adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                mInterstitialAd = interstitialAd;
+                mInterstitialAd.show(Options.this);
+
+                mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                    @Override
+                    public void onAdDismissedFullScreenContent() {
+
+                        Intent intent = new Intent(Options.this,HomePage.class);
+                        startActivity(intent);
+
+                    }
+                });
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                super.onAdFailedToLoad(loadAdError);
+                Intent intent = new Intent(Options.this,HomePage.class);
+                startActivity(intent);
+            }
+        });
+    }
+
 }

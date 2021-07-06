@@ -9,18 +9,18 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WeaponInfo"></activity>
-        <activity android:name=".CharInfo" />
-        <activity android:name=".DiamondInfo" />
-        <activity android:name=".TipsInformation" />
-        <activity android:name=".Diamond" />
-        <activity android:name=".Vehicles" />
-        <activity android:name=".Characters" />
-        <activity android:name=".Weapons" />
-        <activity android:name=".TipsTricks" />
-        <activity android:name=".MainHomePage" />
-        <activity android:name=".HomePage" />
-        <activity android:name=".Options" />
+        <activity android:name=".WeaponInfo" android:hardwareAccelerated="true"></activity>
+        <activity android:name=".CharInfo" android:hardwareAccelerated="true"/>
+        <activity android:name=".DiamondInfo" android:hardwareAccelerated="true"/>
+        <activity android:name=".TipsInformation" android:hardwareAccelerated="true"/>
+        <activity android:name=".Diamond" android:hardwareAccelerated="true"/>
+        <activity android:name=".Vehicles" android:hardwareAccelerated="true"/>
+        <activity android:name=".Characters" android:hardwareAccelerated="true"/>
+        <activity android:name=".Weapons" android:hardwareAccelerated="true"/>
+        <activity android:name=".TipsTricks" android:hardwareAccelerated="true"/>
+        <activity android:name=".MainHomePage" android:hardwareAccelerated="true"/>
+        <activity android:name=".HomePage" android:hardwareAccelerated="true"/>
+        <activity android:name=".Options" android:hardwareAccelerated="true"/>
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

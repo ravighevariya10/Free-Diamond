@@ -1,5 +1,6 @@
 package com.example.diamond;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,10 +9,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+
 public class TipsTricks extends AppCompatActivity {
 
     ImageView arraw_tips,tip1,tip2,tip3,tip4,tip5,tip6,tip7;
     int tipsValue=0;
+    AdRequest adRequest;
+    InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +31,7 @@ public class TipsTricks extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         arraw_tips = findViewById(R.id.arraw_tips);
+        adRequest = new AdRequest.Builder().build();
 
         tip1 = findViewById(R.id.tip1);
         tip2 = findViewById(R.id.tip2);
@@ -43,9 +53,7 @@ public class TipsTricks extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tipsValue = 1;
-                Intent intent = new Intent(TipsTricks.this,TipsInformation.class);
-                intent.putExtra("tipsValue",tipsValue);
-                startActivity(intent);
+                showAd();
             }
         });
 
@@ -53,9 +61,7 @@ public class TipsTricks extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tipsValue = 2;
-                Intent intent = new Intent(TipsTricks.this,TipsInformation.class);
-                intent.putExtra("tipsValue",tipsValue);
-                startActivity(intent);
+                showAd();
             }
         });
 
@@ -63,9 +69,7 @@ public class TipsTricks extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tipsValue = 3;
-                Intent intent = new Intent(TipsTricks.this,TipsInformation.class);
-                intent.putExtra("tipsValue",tipsValue);
-                startActivity(intent);
+                showAd();
             }
         });
 
@@ -73,9 +77,7 @@ public class TipsTricks extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tipsValue = 4;
-                Intent intent = new Intent(TipsTricks.this,TipsInformation.class);
-                intent.putExtra("tipsValue",tipsValue);
-                startActivity(intent);
+                showAd();
             }
         });
 
@@ -83,9 +85,7 @@ public class TipsTricks extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tipsValue = 5;
-                Intent intent = new Intent(TipsTricks.this,TipsInformation.class);
-                intent.putExtra("tipsValue",tipsValue);
-                startActivity(intent);
+                showAd();
             }
         });
 
@@ -93,9 +93,7 @@ public class TipsTricks extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tipsValue = 6;
-                Intent intent = new Intent(TipsTricks.this,TipsInformation.class);
-                intent.putExtra("tipsValue",tipsValue);
-                startActivity(intent);
+                showAd();
             }
         });
 
@@ -103,12 +101,39 @@ public class TipsTricks extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tipsValue = 7;
+                showAd();
+            }
+        });
+
+    }
+
+    public void showAd(){
+        InterstitialAd.load(TipsTricks.this, "ca-app-pub-7287613388864066/8167764203", adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                mInterstitialAd = interstitialAd;
+                mInterstitialAd.show(TipsTricks.this);
+
+                mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                    @Override
+                    public void onAdDismissedFullScreenContent() {
+
+                        Intent intent = new Intent(TipsTricks.this,TipsInformation.class);
+                        intent.putExtra("tipsValue",tipsValue);
+                        startActivity(intent);
+
+                    }
+                });
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                super.onAdFailedToLoad(loadAdError);
                 Intent intent = new Intent(TipsTricks.this,TipsInformation.class);
                 intent.putExtra("tipsValue",tipsValue);
                 startActivity(intent);
             }
         });
-
     }
 
     @Override
