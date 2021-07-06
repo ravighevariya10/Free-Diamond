@@ -9,13 +9,14 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CharInfo"></activity>
+        <activity android:name=".WeaponInfo"></activity>
+        <activity android:name=".CharInfo" />
         <activity android:name=".DiamondInfo" />
         <activity android:name=".TipsInformation" />
         <activity android:name=".Diamond" />
-        <activity android:name=".Vehicles"/>
+        <activity android:name=".Vehicles" />
         <activity android:name=".Characters" />
-        <activity android:name=".Weapons"/>
+        <activity android:name=".Weapons" />
         <activity android:name=".TipsTricks" />
         <activity android:name=".MainHomePage" />
         <activity android:name=".HomePage" />
@@ -30,13 +31,10 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7287613388864066~4994805950"/>
-
+            android:value="ca-app-pub-7287613388864066~4994805950" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
-
 
 </manifest>

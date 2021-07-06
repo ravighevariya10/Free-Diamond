@@ -22,6 +22,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 public class Weapons extends AppCompatActivity {
 
     ImageView arraw_weapon,w1,w2,w3,w4,w5,w6;
+    int weaponValue=0;
 
     AdRequest adRequest;
     InterstitialAd mInterstitialAd;
@@ -66,6 +67,7 @@ public class Weapons extends AppCompatActivity {
         w1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                weaponValue = 1;
                 showAd();
             }
         });
@@ -73,6 +75,7 @@ public class Weapons extends AppCompatActivity {
         w2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                weaponValue = 2;
                 showAd();
             }
         });
@@ -80,6 +83,7 @@ public class Weapons extends AppCompatActivity {
         w3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                weaponValue = 3;
                 showAd();
             }
         });
@@ -87,6 +91,7 @@ public class Weapons extends AppCompatActivity {
         w4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                weaponValue = 4;
                 showAd();
             }
         });
@@ -94,6 +99,7 @@ public class Weapons extends AppCompatActivity {
         w5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                weaponValue = 5;
                 showAd();
             }
         });
@@ -101,6 +107,7 @@ public class Weapons extends AppCompatActivity {
         w6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                weaponValue = 6;
                 showAd();
             }
         });
@@ -118,7 +125,9 @@ public class Weapons extends AppCompatActivity {
                     @Override
                     public void onAdDismissedFullScreenContent() {
 
-                        startActivity(activityIntent);
+                        Intent intent = new Intent(Weapons.this,WeaponInfo.class);
+                        intent.putExtra("weaponValue",weaponValue);
+                        startActivity(intent);
 
                     }
                 });
@@ -128,6 +137,9 @@ public class Weapons extends AppCompatActivity {
             public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                 super.onAdFailedToLoad(loadAdError);
                 Toast.makeText(Weapons.this,"Error: Your Internet connection is not stable",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Weapons.this,WeaponInfo.class);
+                intent.putExtra("weaponValue",weaponValue);
+                startActivity(intent);
             }
         });
     }
